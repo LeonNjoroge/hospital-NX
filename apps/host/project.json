@@ -74,7 +74,8 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/host/public"
+            "input": "apps/host/public",
+            "output": "/assets/"
           }
         ],
         "styles": [
