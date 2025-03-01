@@ -13,6 +13,14 @@
         "jestConfig": "libs/hospital-common/jest.config.ts"
       }
     },
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/libs/hospital-common"],
+      "options": {
+        "tsConfig": "libs/hospital-common/tsconfig.lib.json",
+        "project": "libs/hospital-common/ng-package.json"
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint"
     }

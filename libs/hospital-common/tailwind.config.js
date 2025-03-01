@@ -5,8 +5,6 @@ const { join } = require('path');
 module.exports = {
   content: [
     join(__dirname, 'src/**/!(*.stories|*.spec).{ts,html}'),
-    join(__dirname, '../../libs/**/*.{ts,html,css,scss}'), 
-    join(__dirname, '../../apps/**/*.{ts,html,css,scss}'),
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
