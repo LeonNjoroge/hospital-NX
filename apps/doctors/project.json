@@ -75,6 +75,7 @@
           {
             "glob": "**/*",
             "input": "apps/doctors/public"
+            
           }
         ],
         "styles": [
