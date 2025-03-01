@@ -2,7 +2,9 @@
   "name": "@hospital-nx/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start":"nx run-many --parallel --target=serve -projects=host,patients,doctors"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~19.1.0",
