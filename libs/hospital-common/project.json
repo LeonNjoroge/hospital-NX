@@ -21,6 +21,7 @@
         "project": "libs/hospital-common/ng-package.json"
       }
     },
+    
     "lint": {
       "executor": "@nx/eslint:lint"
     }

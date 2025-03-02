@@ -5,6 +5,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-dashboard',
   imports: [CommonModule],
   templateUrl: './dashoard.component.html',
-  styleUrl: './dashoard.component.css',
+  styleUrl: './dashoard.component.scss',
 })
 export class DashboardComponent {}

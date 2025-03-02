@@ -7,7 +7,8 @@ import { CoreModule } from './common/lib/core.module';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule, CoreModule
-  ]
+    CommonModule
+  ],
+  exports:[CoreModule]
 })
 export class HospitalCommonModule { }
