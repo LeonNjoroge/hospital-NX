@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@hospital-common/libs": ["libs/hospital-common/src/index.ts"]
+      "@hospital-common/libs": ["libs/hospital-common/src/index.ts"],
+      
+
     }
   },
   "exclude": ["node_modules", "tmp"]

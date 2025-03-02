@@ -19,6 +19,7 @@
       "options": {
         "tsConfig": "libs/hospital-common/tsconfig.lib.json",
         "project": "libs/hospital-common/ng-package.json"
+        
       }
     },
     
