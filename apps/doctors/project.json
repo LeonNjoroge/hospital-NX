@@ -74,7 +74,8 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/doctors/public"
+            "input": "apps/doctors/public",
+            "output":"/assets/"
             
           }
         ],

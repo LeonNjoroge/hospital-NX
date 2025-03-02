@@ -1,22 +1,4 @@
 <!-- eslint-disable @angular-eslint/template/label-has-associated-control -->
-<!-- eslint-disable @angular-eslint/template/label-has-associated-control
- Navbar 
-<div class="bg-blue-300 p-4 flex gap-3 w-full shadow-md">
-    <button *ngFor="let item of navItems; let i = index" 
-        (click)="setActive(i)" 
-        routerLink="item.route" 
-        class="navIcons flex flex-col items-center">
-        
-        <img [src]="activeTab === i ? item.activeImg : item.inactiveImg" 
-             alt="{{item.name}} Icon" 
-             class="w-full h-6">
-             
-        <label [ngClass]="[activeTab === i ? 'text-white' : 'text-green-600', 'text-xs']">
-            {{ item.name }}
-        </label>
-    </button>
-</div> -->
-
 <!-- Navbar -->
 <div class="bg-blue-300 p-4 flex gap-3 w-full shadow-md">
     <button *ngFor="let item of navItems; let i = index" 
