@@ -1,28 +1,86 @@
 {
   "name": "patients",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "patients/src",
+  "sourceRoot": "apps/patients/src",
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "executor": "@angular-architects/native-federation:build",
+      "options": {},
+      "configurations": {
+        "production": {
+          "target": "patients:esbuild:production"
+        },
+        "development": {
+          "target": "patients:esbuild:development",
+          "dev": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-architects/native-federation:build",
       "options": {
-        "outputPath": "dist/patients",
-        "index": "patients/src/index.html",
-        "browser": "patients/src/main.ts",
-        "polyfills": ["zone.js"],
-        "tsConfig": "patients/tsconfig.app.json",
+        "target": "patients:serve-original:development",
+        "rebuildDelay": 0,
+        "dev": true,
+        "port": 0
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "patients:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/patients/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "patients:build",
+        "port": 4200,
+        "staticFilePath": "dist/apps/patients/browser",
+        "spa": true
+      }
+    },
+    "esbuild": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/apps/patients",
+        "index": "apps/patients/src/index.html",
+        "browser": "apps/patients/src/main.ts",
+        "polyfills": [
+          "zone.js",
+          "es-module-shims"
+        ],
+        "tsConfig": "apps/patients/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "patients/public"
+            "input": "apps/patients/public",
+            "output":"/assets/"
           }
         ],
-        "styles": ["patients/src/styles.scss"],
+        "styles": [
+          "apps/patients/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -49,41 +107,19 @@
       },
       "defaultConfiguration": "production"
     },
-    "serve": {
+    "serve-original": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "patients:build:production"
+          "buildTarget": "patients:esbuild:production"
         },
         "development": {
-          "buildTarget": "patients:build:development"
+          "buildTarget": "patients:esbuild:development"
         }
       },
-      "defaultConfiguration": "development"
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "patients:build"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "patients/jest.config.ts"
-      }
-    },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "options": {
-        "buildTarget": "patients:build",
-        "port": 4200,
-        "staticFilePath": "dist/patients/browser",
-        "spa": true
+        "port": 4201
       }
     }
   }
