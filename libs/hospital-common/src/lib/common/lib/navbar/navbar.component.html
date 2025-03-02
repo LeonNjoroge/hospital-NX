@@ -1,10 +1,10 @@
 <!-- eslint-disable @angular-eslint/template/label-has-associated-control -->
 <!-- Navbar -->
-<div class="bg-blue-300 p-4 flex gap-3 w-full shadow-md">
+<div class="bg-blue-300 p-4 flex gap-5 w-full shadow-md">
     <button *ngFor="let item of navItems; let i = index" 
         (click)="setActive(i)" 
         routerLink="item.route" 
-        class="flex flex-1 items-center justify-center gap-2 p-2 rounded-md transition-colors"
+        class="flex flex-1 items-center justify-center gap-2 p-1 rounded-md transition-colors"
         [ngClass]="activeTab === i ? 'bg-green-500 text-white' : 'bg-white text-green-500'">
 
         <img [src]="activeTab === i ? item.activeImg : item.inactiveImg" 
