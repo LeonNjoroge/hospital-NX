@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/patients-e2e/src",
+
   "implicitDependencies": ["patients"],
   "// targets": "to see all targets run: nx show project patients-e2e --web",
   "targets": {}

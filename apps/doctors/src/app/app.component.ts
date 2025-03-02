@@ -4,6 +4,7 @@ import { NavbarComponent } from '@hospital-common/libs';
 
 @Component({
   imports: [ RouterModule, NavbarComponent],
+
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
