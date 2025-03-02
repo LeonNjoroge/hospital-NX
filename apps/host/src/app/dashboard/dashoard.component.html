@@ -1,4 +1,20 @@
+<!-- eslint-disable @angular-eslint/template/label-has-associated-control -->
 <lib-navbar></lib-navbar>
-<p class="p-5">dashboard works!</p>
 
-<!---->
+<div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-2">
+    <h1 class="text-4xl font-bold text-center text-darkblue-400 my-3">
+        Welcome to the Hospital Management App
+    </h1>
+
+    <div class="mfe-loader flex gap-10 mt-5 p-4">
+        <div class="flex flex-col items-center object-contain transition-all duration-300 hover:scale-105 hover:shadow-lg hover:bg-blue-200 group">
+            <img src="assets/dashboard/patient.png" alt="Patient" class="w-60 h-60 px-4" />
+            <label class="mt-2 text-lg font-semibold text-blue-400 group-hover:text-green-500">Patient</label>
+        </div>
+        <div class="flex flex-col items-center object-contain transition-all duration-300 hover:scale-105 hover:shadow-lg hover:bg-blue-200 group">
+            <img src="assets/dashboard/doctor.png" alt="Doctor" class="w-60 h-60 p-2" />
+            <label class="mt-2 text-lg font-semibold text-blue-400 group-hover:text-green-500">Doctor</label>
+        </div>
+    </div>
+</div>
+
