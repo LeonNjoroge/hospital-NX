@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { PatientsComponent } from './patients/patients.component';
+
 @Component({
   selector: 'app-remote-entry',
-  imports: [CommonModule],
+  imports: [CommonModule, PatientsComponent],
   templateUrl: './remoteEntry.component.html',
-  styleUrl: './remoteEntry.component.css',
+  styleUrl: './remoteEntry.component.scss',
 })
 export class RemoteEntryComponent {}

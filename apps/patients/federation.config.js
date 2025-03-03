@@ -5,7 +5,8 @@ module.exports = withNativeFederation({
   name: 'patients',
 
   exposes: {
-    './Component': './apps/patients/src/app/app.component.ts',
+    './PatientModule': './apps/patients/src/app/remote/remote.module.ts',
+    './PatientRoute': './apps/patients/src/app/remote/remote.routes.ts'
   },
 
   shared: {
