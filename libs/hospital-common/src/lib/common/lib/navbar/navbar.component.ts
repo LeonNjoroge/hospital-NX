@@ -14,8 +14,8 @@ export class NavbarComponent {
   activeTab: number | null= null;
   
   navItems= [
-    { name: 'HOME', route: '/home', activeImg: 'assets/icons/home.svg', inactiveImg: 'assets/icons/home-bl.svg' },
-    { name: 'PATIENTS', route: '/patient', activeImg: '../assets/icons/categories.svg', inactiveImg: 'assets/icons/categories-bl.svg' },
+    { name: 'HOME', route: '/dashboard', activeImg: 'assets/icons/home.svg', inactiveImg: 'assets/icons/home-bl.svg' },
+    { name: 'PATIENTS', route: '/patients', activeImg: '../assets/icons/categories.svg', inactiveImg: 'assets/icons/categories-bl.svg' },
     { name: 'DOCTORS', route: '/doctors', activeImg: '../assets/icons/cart.svg', inactiveImg: 'assets/icons/cart-bl.svg' },
     { name: 'SETTINGS', route: '/home', activeImg: 'assets/icons/payments.svg', inactiveImg: 'assets/icons/payments-bl.svg' },
     { name: 'CONTACT', route: '/home', activeImg: 'assets/icons/more.svg', inactiveImg: 'assets/icons/more-bl.svg' }

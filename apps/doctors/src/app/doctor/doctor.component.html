@@ -1,3 +1,30 @@
-<div class="doctor-page pt-5">
-    <h1>Enter your details</h1>
-</div>
+<div class="doctor-page pt-5 px-4 md:px-10">
+    <h1 class="text-3xl font-bold text-blue-700 mb-6">Patient Records</h1>
+  
+    <!-- Loading and Error Messages -->
+    <div *ngIf="loading" class="text-center text-gray-600 animate-pulse">Loading...</div>
+    <div *ngIf="error" class="text-center text-red-600 font-semibold">Error fetching data</div>
+  
+    <!-- Patient Table -->
+    <div *ngIf="!loading && !error" class="overflow-x-auto">
+      <table class="w-full border-collapse rounded-lg overflow-hidden shadow-lg">
+        <thead class="bg-blue-500 text-white text-left">
+          <tr>
+            <th class="px-6 py-3">Name</th>
+            <th class="px-6 py-3">Age</th>
+            <th class="px-6 py-3">Email</th>
+            <th class="px-6 py-3">Appointment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let patient of patients" class="odd:bg-gray-100 even:bg-gray-50 hover:bg-gray-200 transition">
+            <td class="px-6 py-3 border-b border-gray-300">{{ patient.name }}</td>
+            <td class="px-6 py-3 border-b border-gray-300">{{ patient.age }}</td>
+            <td class="px-6 py-3 border-b border-gray-300">{{ patient.email }}</td>
+            <td class="px-6 py-3 border-b border-gray-300">{{ patient.datetime | date: 'medium'  }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
