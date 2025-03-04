@@ -5,7 +5,8 @@ module.exports = withNativeFederation({
   name: 'patients',
 
   exposes: {
-    './Component': './apps/patients/src/app/app.component.ts',
+    './PatientModule': './apps/patients/src/app/remote/remote.module.ts',
+    './PatientRoute': './apps/patients/src/app/remote/remote.routes.ts'
   },
 
   shared: {
@@ -15,6 +16,12 @@ module.exports = withNativeFederation({
     '@angular/router': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
     '@angular/platform-browser': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
     '@angular/platform-browser-dynamic': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    '@apollo/client': { singleton: true, requiredVersion: 'auto' },
+    'apollo-angular': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    'apollo-angular/http': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    'subscriptions-transport-ws': { singleton: true, requiredVersion: 'auto' },
+    "relay-runtime": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    "@testing-library/react": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
   },
 
   skip: [

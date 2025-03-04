@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NavbarComponent } from '@hospital-common/libs';
 
 @Component({
-  imports: [ RouterModule, NavbarComponent],
+  imports: [ RouterModule],
 
   selector: 'app-root',
   templateUrl: './app.component.html',
