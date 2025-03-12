@@ -29,13 +29,6 @@
       "datetime": "2025-02-05T23:04"
     },
     {
-      "id": "1002",
-      "name": "Zane Smith",
-      "age": 27,
-      "email": "janesmith@example.com",
-      "datetime": "2025-04-10T10:15"
-    },
-    {
       "id": "1005",
       "name": "Charlie Green",
       "age": 22,
