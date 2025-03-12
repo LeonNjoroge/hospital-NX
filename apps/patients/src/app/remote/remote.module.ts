@@ -4,6 +4,7 @@ import { RemoteEntryComponent } from './remoteEntry.component';
 import { PatientRoutingModule } from './remote.routes';
 
 
+
 @NgModule({
   declarations: [],
   imports: [

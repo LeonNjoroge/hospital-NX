@@ -14,6 +14,8 @@
             <th class="px-6 py-3">Age</th>
             <th class="px-6 py-3">Email</th>
             <th class="px-6 py-3">Appointment</th>
+            <th class="px-6 py-3"></th>
+            <th class="px-6 py-3"></th>
           </tr>
         </thead>
         <tbody>
@@ -22,9 +24,66 @@
             <td class="px-6 py-3 border-b border-gray-300">{{ patient.age }}</td>
             <td class="px-6 py-3 border-b border-gray-300">{{ patient.email }}</td>
             <td class="px-6 py-3 border-b border-gray-300">{{ patient.datetime | date: 'medium'  }}</td>
+            <td class="border p-2">
+              <button
+                (click)="editPatient(patient)"
+                class="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 transition"
+              >
+                Update
+              </button>
+            </td>
+            <td><button
+              (click)="removePatient(patient.id)"
+              class=" bg-blue-500 text-white px-2 py-1 rounded-lg hover:bg-red-600 transition"
+            >
+              Remove
+            </button></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  
+
+
+  <!-- Hovering Update Form -->
+  <div *ngIf="selectedPatient" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
+      <h2 class="text-xl font-semibold text-gray-800">Update Patient</h2>
+      <form (ngSubmit)="onUpdate(updateForm)" #updateForm="ngForm" class="flex flex-col gap-4">
+        <input type="hidden" name="id" [(ngModel)]="selectedPatient.id" />
+
+        <div class="flex flex-col">
+          <label class="text-gray-700 font-medium">Name:</label>
+          <input type="text" name="name" [(ngModel)]="selectedPatient.name" required class="border p-2 rounded-md" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="text-gray-700 font-medium">Age:</label>
+          <input type="number" name="age" [(ngModel)]="selectedPatient.age" required class="border p-2 rounded-md" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="text-gray-700 font-medium">Email:</label>
+          <input type="email" name="email" [(ngModel)]="selectedPatient.email" required class="border p-2 rounded-md" />
+        </div>
+
+        <div class="flex flex-col">
+          <label class="text-gray-700 font-medium">Appointment:</label>
+          <input type="datetime-local" name="datetime" [(ngModel)]="selectedPatient.datetime" required class="border p-2 rounded-md" />
+        </div>
+
+        <div class="flex gap-2 mt-4">
+          <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+            Update
+          </button>
+          <button type="button" (click)="cancelUpdate()" class="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500">
+            Cancel
+          </button>
+        </div>
+
+        <button type="button" (click)="cancelUpdate()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+          ✖
+        </button>
+      </form>
+    </div>
+  </div>

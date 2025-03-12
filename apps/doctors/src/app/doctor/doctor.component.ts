@@ -1,72 +1,115 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RemoteModule } from '../remote/remote.module';
+import { Apollo, gql } from 'apollo-angular';
+import { FormsModule, NgForm} from '@angular/forms';
+
+
+const GET_PATIENTS = gql`
+  query {
+    patients {
+      id
+      name
+      age
+      email
+      datetime
+    }
+  }
+`;
+
+const DELETE_PATIENT = gql`
+  mutation DeletePatient($id: ID!) {
+    deletePatient(id: $id) {
+      id
+    }
+  }
+`;
+
+const UPDATE_PATIENT = gql`
+  mutation UpdatePatient($id: ID!, $name: String, $age: Int, $email: String, $datetime: String) {
+    updatePatient(id: $id, name: $name, age: $age, email: $email, datetime: $datetime) {
+      id
+      name
+      age
+      email
+      datetime
+    }
+  }
+`;
+
 
 @Component({
   selector: 'app-doctor',
-  imports: [CommonModule, RemoteModule],
+  imports: [CommonModule, RemoteModule, FormsModule],
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.scss',
 })
-export class DoctorComponent  {
+export class DoctorComponent implements OnInit {
   loading = false;
   error: string | null = null;
   patients: any[] = [];
+  selectedPatient: any = null;
 
   
 
-  constructor() {
-    this.loadPatients();
-  }
-
+  constructor(private apollo: Apollo) {}
+   
   
-  loadPatients() {
-    this.loading = true;
+    ngOnInit() {
+      this.loading = true;
 
-    
-      setTimeout(() => {
-        this.patients = [
-          {
-            "id": 1,
-            "name": "John Doe",
-            "age": 32,
-            "email": "johndoe@example.com",
-            "datetime": "2025-04-03T15:30:00Z"
-          },
-          {
-            "id": 2,
-            "name": "Jane Smith",
-            "age": 28,
-            "email": "janesmith@example.com",
-            "datetime": "2025-05-03T16:10:00Z"
-          },
-          {
-            "id": 3,
-            "name": "Alice Johnson",
-            "age": 45,
-            "email": "alicejohnson@example.com",
-            "datetime": "2025-03-05T17:40:00Z"
-          },
-          {
-            "id": 4,
-            "name": "Michael Brown",
-            "age": 50,
-            "email": "michaelbrown@example.com",
-            "datetime": "2025-07-03T18:30:00Z"
-          },
-          {
-            "id": 5,
-            "name": "Emily Wilson",
-            "age": 36,
-            "email": "emilywilson@example.com",
-            "datetime": "2025-03-03T08:10:00Z"
-          }
-        ];
-    
-        this.loading = false; // Stop loading
-      }, 2000); // Simulating an API call with a delay
+      this.apollo
+        .watchQuery({ query: GET_PATIENTS })
+        .valueChanges.subscribe(({ data, loading, error }: any) => {
+          this.loading = loading;
+          this.error = error;
+          this.patients = data?.patients;
+        });
+        
+        this.loading = false;
+        
     }
 
+    removePatient(id: string) {
+      this.apollo
+        .mutate({
+          mutation: DELETE_PATIENT,
+          variables: { id },
+          refetchQueries: [{ query: GET_PATIENTS }], // Refresh list after deleting
+        })
+        .subscribe({
+          next: () => console.log(`Patient with ID ${id} removed.`),
+          error: (err) => console.error('Error removing patient:', err),
+        });
+    }
+    
+
+    editPatient(patient: any) {
+      this.selectedPatient = { ...patient }; // Copy patient data into the form
+    }
+  
+    onUpdate(form: NgForm) {
+      if (form.invalid) return;
+  
+      const { id, name, age, email, datetime } = this.selectedPatient;
+  
+      this.apollo
+        .mutate({
+          mutation: UPDATE_PATIENT,
+          variables: { id, name, age: Number(age), email, datetime },
+          refetchQueries: [{ query: GET_PATIENTS }],
+        })
+        .subscribe({
+          next: () => {
+            this.selectedPatient = null;
+          },
+          error: (err) => console.error("Error updating patient:", err),
+        });
+    }
+
+    cancelUpdate() {
+      this.selectedPatient = null; // Hide the update form if canceled
+    }
   }
 
   

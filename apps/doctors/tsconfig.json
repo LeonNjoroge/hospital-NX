@@ -10,7 +10,7 @@
     "noFallthroughCasesInSwitch": true
   },
   "files": [],
-  "include": [],
+  "include": ["libs/hospital-common/src/index.ts"],
   "references": [
     {
       "path": "./tsconfig.editor.json"

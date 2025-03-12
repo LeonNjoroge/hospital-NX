@@ -20,6 +20,15 @@ const typeDefs = `#graphql
   type Mutation {
     addPatient(name: String!, age: Int!, email: String!, datetime: String!): Patient
   }
+
+  type Mutation {
+  deletePatient(id: ID!): Patient
+}
+
+type Mutation {
+  updatePatient(id: ID!, name: String, age: Int, email: String, datetime: String): Patient
+}
+
 `;
 
 const resolvers = {
@@ -48,7 +57,37 @@ const resolvers = {
         throw new Error("Failed to add patient.");
       }
     },
+    deletePatient: async (_: any, { id }: any) => {
+      try {
+        const response = await axios.delete(`${BASE_URL}/patients/${id}`);
+        return response.data;
+      } catch (error) {
+        console.error("Error deleting patient:", error);
+        throw new Error("Failed to delete patient.");
+      }
+    },
+
+    updatePatient: async (_: any, { id, name, age, email, datetime }: any) => {
+      try {
+        const response = await axios.patch(`${BASE_URL}/patients/${id}`, {
+          name,
+          age,
+          email,
+          datetime,
+        });
+  
+        return response.data;
+      } catch (error) {
+        console.error("Error updating patient:", error);
+        throw new Error("Failed to update patient.");
+      }
+    },
   },
+
+  
+
+ 
+
 };
 
 // Create Apollo Server

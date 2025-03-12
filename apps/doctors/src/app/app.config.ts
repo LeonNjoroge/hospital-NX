@@ -1,16 +1,28 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection, inject } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { appRoutes } from './app.routes';
+import { remoteRoutes } from './remote/remote.routes';
 
-import { provideClientHydration } from '@angular/platform-browser';
+import { provideApollo } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
 import { provideHttpClient } from '@angular/common/http';
+import { InMemoryCache } from '@apollo/client/core';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes),
+    provideRouter(remoteRoutes),
 
-    provideClientHydration(),
     provideHttpClient(),
+    provideApollo(() => {
+      const httpLink = inject(HttpLink);
+ 
+      return {
+        link: httpLink.create({ uri: 'http://localhost:4000' }),
+        cache: new InMemoryCache(),
+      
+      };
+    }),
+
   ],
 };
